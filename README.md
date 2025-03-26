@@ -15,20 +15,151 @@ This project uses a scalable **Monorepo structure with Turborepo**, a clean **MV
 
 ## 📁 Folder Structure
 
-```
+Absolutely! Let’s break down the **full monorepo architecture** you're building for `SST_Internal-Tools`, with clear directory-level explanations for each part of the stack, aligned with:
+
+- **Turborepo structure**
+- **MVC backend (Node.js + Express)**
+- **Frontend using React + Vite**
+- **Future packages (shared UI, auth, utils)**
+
+---
+
+## ✅ Monorepo Folder Architecture for SST_Internal-Tools
+
+
 SST_Internal-Tools/
-├── apps/
-│   ├── web/              # React frontend (Vite)
-│   └── backend/          # Node.js + Express backend (MVC)
-├── packages/             # (optional) Shared libraries (auth, UI, config, utils)
-├── .env.example          # Example environment file
-├── .gitignore
-├── package.json
-├── turbo.json            # Turborepo configuration
-└── README.md
+├── apps/                             # All runnable apps go here
+│   ├── backend/                      # Node.js + Express backend (MVC)
+│   │   ├── controllers/              # Handle request logic (e.g., userController.js)
+│   │   ├── models/                   # DB models/schema definitions
+│   │   ├── routes/                   # Express routes (e.g., userRoutes.js)
+│   │   ├── services/                 # Business logic (used by controllers)
+│   │   ├── middlewares/             # Reusable middleware (e.g., authMiddleware.js)
+│   │   ├── config/                   # DB connection, environment setup
+│   │   ├── utils/                    # Helper utilities (e.g., token, logger)
+│   │   ├── app.js                    # Express app setup
+│   │   └── server.js                 # Entry point to start the server
+│   │
+│   └── web/                          # React frontend (Vite)
+│       ├── public/                   # Static files (favicon, etc.)
+│       ├── src/
+│       │   ├── components/           # Reusable UI components (e.g., Button, Card)
+│       │   ├── pages/                # Page-level views (Home.jsx, Dashboard.jsx)
+│       │   ├── routes/               # React Router config
+│       │   ├── services/             # API services (e.g., axios instances)
+│       │   ├── utils/                # Frontend utilities (formatters, validators)
+│       │   ├── App.jsx               # Main App entry
+│       │   └── main.jsx              # React DOM renderer
+│       ├── index.html
+│       └── vite.config.js
+│
+├── packages/                         # Shared code across apps
+│   ├── ui/                           # (Optional) Shared design system (Button, Modal, etc.)
+│   ├── auth/                         # (Optional) Auth-related logic (JWT handling, roles)
+│   ├── config/                       # (Optional) Shared config like tailwind, eslint, etc.
+│   └── utils/                        # (Optional) Shared utilities (validators, date utils, etc.)
+│
+├── .env.example                      # Example environment file for setup
+├── .gitignore                        # Ignore node_modules, .env, etc.
+├── package.json                      # Root-level scripts and workspace definition
+├── turbo.json                        # Turborepo pipeline config
+└── README.md                         # Project overview and usage
+
+
+---
+
+## 💡 Folder Breakdown
+
+### 🧠 apps/backend (MVC)
+
+- **controllers/** → Handle HTTP requests and call services
+- **models/** → Define your data structure (with Mongoose, Sequelize, Prisma, etc.)
+- **routes/** → API endpoints (e.g., `/auth`, `/students`, `/hostel`)
+- **services/** → Business logic, often reusable by multiple controllers
+- **middlewares/** → e.g., authentication, error handling, validation
+- **config/** → Database setup, third-party configs
+- **utils/** → Custom logger, token handler, etc.
+- **app.js** → Sets up Express app and middleware
+- **server.js** → Boots up the server
+
+---
+
+### 💻 apps/web (React + Vite)
+
+- **components/** → Reusable UI blocks like `<Button />`, `<Navbar />`
+- **pages/** → Route-linked views like `Dashboard`, `LeaveForm`
+- **routes/** → React Router setup with layout wrappers
+- **services/** → Axios instance, API call logic
+- **utils/** → Any helper functions
+- **main.jsx / App.jsx** → App setup with router and layout
+
+---
+
+### 📦 packages/ (Optional but scalable)
+
+Start empty or create:
+- **ui/** → Shared design components (used in web + admin panels)
+- **auth/** → Shared auth utilities (JWT decode, protected routes, role guards)
+- **config/** → Tailwind config, tsconfig, eslint settings
+
+---
+
+## ✅ Turborepo-Specific Notes
+
+### package.json (root)
+```json
+{
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "lint": "turbo run lint"
+  },
+  "devDependencies": {
+    "turbo": "^1.12.0"
+  }
+}
 ```
 
 ---
+
+### turbo.json
+```json
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "build": {
+      "outputs": ["dist/**"]
+    },
+    "lint": {}
+  }
+}
+```
+
+---
+
+## ✅ Summary
+
+You now have a **fully scalable folder architecture** ready to:
+
+- Add new apps (e.g., `admin/`, `mobile/`)
+- Reuse components across apps (`packages/ui`)
+- Deploy backend and frontend independently
+- Add CI/CD workflows later (GitHub Actions)
+
+---
+
+Would you like me to now:
+- Scaffold one sample route/controller/model (`/auth/login`)?
+- Set up a shared `packages/ui` library with Tailwind?
+- Create `authMiddleware`, `errorHandler`, etc. for backend?
+
+Let me know what the next step should be!
 
 ## 🛠 Tech Stack
 
