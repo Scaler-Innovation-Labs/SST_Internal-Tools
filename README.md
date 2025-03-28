@@ -22,46 +22,42 @@ This project uses a scalable **Monorepo structure with Turborepo**, a clean **MV
 ## ✅ Monorepo Folder Architecture for SST_Internal-Tools
 
 SST_Internal-Tools/
-├── apps/ # All runnable applications go here
-│ ├── E-Learning_Hub/ # E-Learning Hub Application
-│ │ ├── backend/ # Backend for E-Learning Hub (Node.js + Express API)
-│ │ │ ├── controllers/ # Handles request logic (e.g., courseController.js)
-│ │ │ ├── models/ # Database models/schema definitions (e.g., Course.js)
-│ │ │ ├── routes/ # Express routes (e.g., courseRoutes.js)
-│ │ │ ├── services/ # Business logic used by controllers
-│ │ │ ├── middlewares/ # Middleware functions (e.g., authMiddleware.js)
-│ │ │ ├── config/ # Database connections & environment setup
-│ │ │ ├── utils/ # Helper utilities (e.g., token generation, logging)
-│ │ │ ├── app.js # Express application setup
-│ │ │ └── server.js # Main entry point to start the Express server
-│ │ ├── web/ # Frontend for E-Learning Hub (React + Vite)
-│ │ │ ├── public/ # Static files (favicon, etc.)
-│ │ │ ├── src/
-│ │ │ │ ├── components/ # Reusable UI components (e.g., Button, Modal)
-│ │ │ │ ├── pages/ # Page-level views (Dashboard.jsx, CoursePage.jsx)
-│ │ │ │ ├── routes/ # React Router configuration
-│ │ │ │ ├── services/ # API services (Axios instances)
-│ │ │ │ ├── utils/ # Frontend utilities (formatters, validators)
-│ │ │ │ ├── App.jsx # Main application entry
-│ │ │ │ └── main.jsx # React DOM renderer
-│ │ │ ├── index.html # Main HTML file
-│ │ │ └── vite.config.js # Vite configuration file
-│ │
-│ ├── Hostel_Management/ # Hostel Management Application
-│ │ ├── backend/ # Same backend structure as E-Learning Hub
-│ | |  
-│ │ ├── web/ # Same frontend structure as E-Learning Hub
-│ │  
+├── apps/               # All runnable applications
+│   ├── backend/        # Node.js + Express backend (MVC)
+│   │   ├── controllers/   # Handles request logic (e.g., userController.js)
+│   │   ├── models/        # Database models/schema definitions
+│   │   ├── routes/        # Express routes (e.g., userRoutes.js)
+│   │   ├── services/      # Business logic (used by controllers)
+│   │   ├── middlewares/   # Reusable middleware (e.g., authMiddleware.js)
+│   │   ├── config/        # DB connection, environment setup
+│   │   ├── utils/         # Helper utilities (e.g., token, logger)
+│   │   ├── app.js         # Express app setup
+│   │   └── server.js      # Entry point to start the server
+│   │
+│   └── web/            # React frontend (Vite)
+│       ├── public/        # Static files (favicon, etc.)
+│       ├── src/
+│       │   ├── components/  # Reusable UI components (Button, Card)
+│       │   ├── pages/       # Page-level views (Home.jsx, Dashboard.jsx)
+│       │   ├── routes/      # React Router configuration
+│       │   ├── services/    # API services (axios instances)
+│       │   ├── utils/       # Frontend utilities (formatters, validators)
+│       │   ├── App.jsx      # Main App entry
+│       │   └── main.jsx     # React DOM renderer
+│       ├── index.html
+│       └── vite.config.js
 │
-│ ├── Mess_Management/ # Mess Management Application
-│ │ ├── backend/ # Same backend structure as above
-│ │ ├── web/ # Same frontend structure as above
+├── packages/           # Shared code across apps
+│   ├── ui/             # (Optional) Shared design system (Button, Modal, etc.)
+│   ├── auth/           # (Optional) Authentication logic (JWT handling, roles)
+│   ├── config/         # (Optional) Shared configurations (Tailwind, ESLint, etc.)
+│   └── utils/          # (Optional) Shared utilities (validators, date utils)
 │
-├── .env.example # Example environment variables for setup
-├── .gitignore # Ignore node_modules, .env, etc.
-├── package.json # Root-level scripts and workspace definition
-├── turbo.json # Turborepo pipeline configuration
-└── README.md # Documentation
+├── .env.example        # Example environment file
+├── .gitignore          # Ignore node_modules, .env, etc.
+├── package.json        # Root-level scripts and workspace definition
+├── turbo.json          # Turborepo pipeline configuration
+└── README.md           # Project overview and usage
 
 ---
 
