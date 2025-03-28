@@ -1,0 +1,17 @@
+{
+    "name": "sst-internal-tools",
+    "private": true,
+    "workspaces": [
+      "apps/*",
+      "packages/*"
+    ],
+    "scripts": {
+      "dev": "turbo run dev",
+      "build": "turbo run build",
+      "start": "turbo run start"
+    },
+    "devDependencies": {
+      "turbo": "^1.10.5"
+    }
+  }
+  
